@@ -1,4 +1,4 @@
-package com.klyxdevs.rickmortyapp.ui
+package com.klyxdevs.rickmortyapp.ui.testScreen
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
@@ -8,8 +8,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.Button
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -20,7 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.klyxdevs.rickmortyapp.Greeting
-import com.klyxdevs.rickmortyapp.data.HomeScreenRoute
+import com.klyxdevs.rickmortyapp.ui.core.navigation.HomeScreenRoute
 import org.jetbrains.compose.resources.painterResource
 import rickmortyapp.composeapp.generated.resources.Res
 import rickmortyapp.composeapp.generated.resources.compose_multiplatform
