@@ -65,6 +65,9 @@ kotlin {
             implementation(libs.kotlin.serialization)
             //ViewModel
             implementation(libs.viewmodel.compose)
+            //Coil
+            implementation(libs.coil.compose)
+            implementation(libs.coil.network.ktor)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)

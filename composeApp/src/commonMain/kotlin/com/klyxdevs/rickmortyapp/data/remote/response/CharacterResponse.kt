@@ -8,13 +8,15 @@ import kotlinx.serialization.Serializable
 data class CharacterResponse(
     val id: Int,
     val status: String,
-    val image: String
+    val image: String,
+    val name : String
 ) {
     fun toDomain(): CharacterModel {
         return CharacterModel(
             id = this.id.toString(),
             isAlive = this.status.lowercase() == "Alive",
-            image = this.image
+            image = this.image,
+            name = this.name
         )
     }
 }
