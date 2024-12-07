@@ -5,16 +5,16 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
-import com.klyxdevs.rickmortyapp.ui.core.navigation.NavRoutes
+import com.klyxdevs.rickmortyapp.ui.core.navigation.BottomBarRoutes
 
 sealed class BottomBarItem {
-    abstract val route: NavRoutes
+    abstract val route: BottomBarRoutes
     abstract val title: String
     abstract val icon: @Composable () -> Unit
 
     data object Episodes : BottomBarItem() {
-        override val route: NavRoutes
-            get() = NavRoutes.EpisodesNavScreen
+        override val route: BottomBarRoutes
+            get() = BottomBarRoutes.EpisodesScreen
         override val title: String
             get() = "Episodes"
         override val icon: @Composable () -> Unit
@@ -22,8 +22,8 @@ sealed class BottomBarItem {
     }
 
     data object Characters : BottomBarItem() {
-        override val route: NavRoutes
-            get() = NavRoutes.CharactersNavScreen
+        override val route: BottomBarRoutes
+            get() = BottomBarRoutes.CharactersScreen
         override val title: String
             get() = "Characters"
         override val icon: @Composable () -> Unit

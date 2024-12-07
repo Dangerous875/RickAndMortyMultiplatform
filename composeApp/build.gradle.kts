@@ -63,11 +63,14 @@ kotlin {
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.negotiation)
             implementation(libs.kotlin.serialization)
+            implementation(libs.ktor.client.logging)
             //ViewModel
             implementation(libs.viewmodel.compose)
             //Coil
             implementation(libs.coil.compose)
             implementation(libs.coil.network.ktor)
+            //Logs
+            implementation(libs.logs.kermit)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)

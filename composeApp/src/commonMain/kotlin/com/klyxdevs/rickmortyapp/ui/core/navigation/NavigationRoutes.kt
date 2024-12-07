@@ -11,12 +11,9 @@ data class TestScreenRoute(val string: String)
 // BottomNav
 
 @Serializable
-sealed class NavRoutes(val route: String) {
+sealed class BottomBarRoutes{
     @Serializable
-    data object EpisodesNavScreen :
-        NavRoutes("com.klyxdevs.rickmortyapp.ui.core.navigation.NavRoutes.EpisodesNavScreen")
-
+    data object EpisodesScreen : BottomBarRoutes()
     @Serializable
-    data object CharactersNavScreen :
-        NavRoutes("com.klyxdevs.rickmortyapp.ui.core.navigation.NavRoutes.CharactersNavScreen")
+    data object CharactersScreen : BottomBarRoutes()
 }
