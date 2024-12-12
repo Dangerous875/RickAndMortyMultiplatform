@@ -74,6 +74,8 @@ kotlin {
             //Paging3
             implementation(libs.paging.compose.common)
             implementation(libs.paging.common)
+            //Datetime
+            implementation(libs.kotlinx.datetime)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)

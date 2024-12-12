@@ -30,7 +30,7 @@ viewmodel = "2.8.2"
 coil = "3.0.0-alpha08"
 #Paging3
 pagingComposeCommon = "3.3.0-alpha02-0.4.0"
-
+kotlinxDatetime = "0.6.0"
 kermit = "2.0.4"
 
 [libraries]
@@ -78,6 +78,9 @@ coil-network-ktor = { group = "io.coil-kt.coil3", name = "coil-network-ktor", ve
 #Paging3
 paging-common = { module = "app.cash.paging:paging-common", version.ref = "pagingComposeCommon" }
 paging-compose-common = { module = "app.cash.paging:paging-compose-common", version.ref = "pagingComposeCommon" }
+
+#Date
+kotlinx-datetime = {module = "org.jetbrains.kotlinx:kotlinx-datetime",version.ref = "kotlinxDatetime"}
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
