@@ -1,12 +1,14 @@
 package com.klyxdevs.rickmortyapp.ui.homeScreen
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
@@ -18,8 +20,10 @@ import com.klyxdevs.rickmortyapp.ui.core.navigation.bottomnavigation.NavigationB
 fun HomeScreen() {
     val items = listOf(BottomBarItem.Episodes, BottomBarItem.Characters)
     val navControllerNavBar = rememberNavController()
-    Scaffold(bottomBar = { BottomNavigation(items, navControllerNavBar) }) {
-        Box { NavigationBottomWrapper(navControllerNavBar) }
+    Scaffold(bottomBar = { BottomNavigation(items, navControllerNavBar) }) { padding ->
+        Box(modifier = Modifier.padding(padding)) {
+            NavigationBottomWrapper(navControllerNavBar)
+        }
     }
 }
 
