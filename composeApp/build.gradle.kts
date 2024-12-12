@@ -71,6 +71,9 @@ kotlin {
             implementation(libs.coil.network.ktor)
             //Logs
             implementation(libs.logs.kermit)
+            //Paging3
+            implementation(libs.paging.compose.common)
+            implementation(libs.paging.common)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
