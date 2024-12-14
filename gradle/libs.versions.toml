@@ -32,6 +32,7 @@ coil = "3.0.0-alpha08"
 pagingComposeCommon = "3.3.0-alpha02-0.4.0"
 kotlinxDatetime = "0.6.0"
 kermit = "2.0.4"
+#Room
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
