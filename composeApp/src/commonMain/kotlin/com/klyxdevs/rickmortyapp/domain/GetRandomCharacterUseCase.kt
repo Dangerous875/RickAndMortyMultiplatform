@@ -1,5 +1,6 @@
 package com.klyxdevs.rickmortyapp.domain
 
+import co.touchlab.kermit.Logger
 import com.klyxdevs.rickmortyapp.domain.model.CharacterModel
 import kotlinx.datetime.Clock
 import kotlinx.datetime.TimeZone
@@ -8,6 +9,8 @@ import kotlinx.datetime.toLocalDateTime
 class GetRandomCharacterUseCase(private val repository: Repository) {
     // val characterDataBase = repository.gerSavedCharacter()
     suspend operator fun invoke(): CharacterModel {
+        repository.getCharacterDB()
+        Logger.i("TestDB -> ${repository.getCharacterDB()}")
         val random = (1..826).random()
         return repository.getSingleCharacter(random.toString())
 

@@ -2,10 +2,10 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "181ebb832a3031a1dd9bb830a7acccd5",
+    "identityHash": "54b2079bd26c7be24107c6920f065754",
     "entities": [
       {
-        "tableName": "characteroftheda",
+        "tableName": "characteroftheday",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `isAlive` INTEGER NOT NULL, `image` TEXT NOT NULL, `name` TEXT NOT NULL, `selectedDate` TEXT NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
@@ -49,7 +49,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '181ebb832a3031a1dd9bb830a7acccd5')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '54b2079bd26c7be24107c6920f065754')"
     ]
   }
 }

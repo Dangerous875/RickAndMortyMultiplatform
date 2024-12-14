@@ -3,7 +3,7 @@ package com.klyxdevs.rickmortyapp.data.database.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "characteroftheda")
+@Entity(tableName = "characteroftheday")
 data class CharacterOfTheDayEntity(
     @PrimaryKey
     val id: String,
