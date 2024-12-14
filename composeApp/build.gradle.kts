@@ -12,6 +12,11 @@ plugins {
 }
 
 kotlin {
+
+    sourceSets.commonMain {
+        kotlin.srcDir("build/generated/ksp/metadata")
+    }
+
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
@@ -131,9 +136,9 @@ android {
     }
 }
 
-//ksp {
-//    arg("room.schemaLocation", "${projectDir}/schemas")
-//}
+ksp {
+    arg("room.schemaLocation", "${projectDir}/schemas")
+}
 
 dependencies {
     add("kspCommonMainMetadata", libs.room.compiler)
