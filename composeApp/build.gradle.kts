@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlinxSerialization)
+    alias(libs.plugins.kspCompose)
 }
 
 kotlin {
@@ -76,6 +77,9 @@ kotlin {
             implementation(libs.paging.common)
             //Datetime
             implementation(libs.kotlinx.datetime)
+            //Room
+            implementation(libs.room.runtime)
+            implementation(libs.androidx.sqlite.bundled)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
@@ -125,6 +129,19 @@ android {
     dependencies {
         debugImplementation(compose.uiTooling)
     }
+}
+
+//ksp {
+//    arg("room.schemaLocation", "${projectDir}/schemas")
+//}
+
+dependencies {
+    add("kspCommonMainMetadata", libs.room.compiler)
+    add("kspAndroid", libs.room.compiler)
+    add("kspDesktop", libs.room.compiler)
+    add("kspIosX64", libs.room.compiler)
+    add("kspIosArm64", libs.room.compiler)
+    add("kspIosSimulatorArm64", libs.room.compiler)
 }
 
 compose.desktop {
