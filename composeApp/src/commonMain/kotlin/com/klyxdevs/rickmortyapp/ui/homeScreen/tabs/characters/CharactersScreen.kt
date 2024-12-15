@@ -102,6 +102,7 @@ fun CharactersGridList(
                             CharacterItemList(characterModel)
                         }
                     }
+                    // carga final
                     if (characters.loadState.append is LoadState.Loading) {
                         item(span = { GridItemSpan(2) }) {
                             CircularProgressBar(color = Green)

@@ -2,6 +2,7 @@ package com.klyxdevs.rickmortyapp.ui.homeScreen.tabs.characters.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.cachedIn
 import com.klyxdevs.rickmortyapp.domain.GetAllCharactersUseCase
 import com.klyxdevs.rickmortyapp.domain.GetRandomCharacterUseCase
 import com.klyxdevs.rickmortyapp.ui.homeScreen.tabs.characters.CharacterState
@@ -33,7 +34,7 @@ class CharactersViewModel(
 
     private fun getAllCharacters() {
         _state.update { state ->
-            state.copy(characters = getAllCharactersUseCase())
+            state.copy(characters = getAllCharactersUseCase().cachedIn(viewModelScope))
         }
     }
 

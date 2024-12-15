@@ -36,6 +36,8 @@ kermit = "2.0.4"
 roomCommon = "2.7.0-alpha12"
 ksp = "2.0.21-1.0.27"
 androidx-sqliteBundled = "2.5.0-alpha12"
+core-splashscreen = "1.0.1"
+composeWebviewMultiplatform = "1.9.20"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -92,6 +94,11 @@ room-runtime-android = { group = "androidx.room", name = "room-runtime-android",
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomCommon" }
 androidx-sqlite-bundled = { group = "androidx.sqlite", name = "sqlite-bundled", version.ref = "androidx-sqliteBundled" }
 
+#Splasg
+core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "core-splashscreen" }
+
+#WebView
+compose-webview-multiplatform = { module = "io.github.kevinnzou:compose-webview-multiplatform", version.ref = "composeWebviewMultiplatform" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
