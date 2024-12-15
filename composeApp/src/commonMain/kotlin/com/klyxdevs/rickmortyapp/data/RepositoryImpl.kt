@@ -8,6 +8,7 @@ import com.klyxdevs.rickmortyapp.data.remote.ApiService
 import com.klyxdevs.rickmortyapp.data.remote.paging.CharactersPagingSource
 import com.klyxdevs.rickmortyapp.domain.Repository
 import com.klyxdevs.rickmortyapp.domain.model.CharacterModel
+import com.klyxdevs.rickmortyapp.domain.model.CharacterOfTheDayModel
 import kotlinx.coroutines.flow.Flow
 
 class RepositoryImpl(
@@ -30,8 +31,11 @@ class RepositoryImpl(
             pagingSourceFactory = { charactersPagingSource }).flow
     }
 
-    override suspend fun getCharacterDB():String {
-        val result = rickMortyDatabase.getPreferencesDao().getCharacterOfTheDayDB()
-        return if (result == null)  "null" else "asd"
+    override suspend fun getCharacterDB():CharacterOfTheDayModel? {
+        return rickMortyDatabase.getPreferencesDao().getCharacterOfTheDayDB()?.toDomain()
+    }
+
+    override suspend fun saveCharacter(characterOfTheDayModel: CharacterOfTheDayModel) {
+        rickMortyDatabase.getPreferencesDao().saveCharacter(characterOfTheDayModel.toEntity())
     }
 }

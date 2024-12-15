@@ -2,6 +2,7 @@ package com.klyxdevs.rickmortyapp.domain
 
 import androidx.paging.PagingData
 import com.klyxdevs.rickmortyapp.domain.model.CharacterModel
+import com.klyxdevs.rickmortyapp.domain.model.CharacterOfTheDayModel
 import kotlinx.coroutines.flow.Flow
 
 interface Repository {
@@ -9,5 +10,7 @@ interface Repository {
 
     fun getAllCharacters():Flow<PagingData<CharacterModel>>
 
-    suspend fun getCharacterDB():String
+    suspend fun getCharacterDB(): CharacterOfTheDayModel?
+
+    suspend fun saveCharacter(characterOfTheDayModel: CharacterOfTheDayModel)
 }
