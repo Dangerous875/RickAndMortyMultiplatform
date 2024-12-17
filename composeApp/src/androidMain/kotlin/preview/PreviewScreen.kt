@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import com.klyxdevs.rickmortyapp.domain.model.CharacterModel
-import com.klyxdevs.rickmortyapp.ui.homeScreen.tabs.characters.CharacterOfTheDay
+import com.klyxdevs.rickmortyapp.ui.screens.homeScreen.tabs.characters.CharacterOfTheDay
 
 @Preview(
     showBackground = true,
@@ -18,5 +18,16 @@ import com.klyxdevs.rickmortyapp.ui.homeScreen.tabs.characters.CharacterOfTheDay
 )
 @Composable
 fun PreviewScreen() {
-    CharacterOfTheDay(CharacterModel(id = "22", isAlive = true, name = "pepeppepepepepepeep", image = ""))
+//    CharacterOfTheDay(
+//        CharacterModel(
+//            id = "22",
+//            isAlive = true,
+//            name = "pepeppepepepepepeep",
+//            image = "",
+//            species = "",
+//            gender = "",
+//            origin = "",
+//            episode = listOf("")
+//        )
+//    )
 }

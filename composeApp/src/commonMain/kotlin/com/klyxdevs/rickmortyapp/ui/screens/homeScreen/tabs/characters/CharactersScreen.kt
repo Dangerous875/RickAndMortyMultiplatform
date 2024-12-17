@@ -1,4 +1,4 @@
-package com.klyxdevs.rickmortyapp.ui.homeScreen.tabs.characters
+package com.klyxdevs.rickmortyapp.ui.screens.homeScreen.tabs.characters
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -34,6 +34,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import androidx.paging.LoadState
 import app.cash.paging.compose.LazyPagingItems
 import app.cash.paging.compose.collectAsLazyPagingItems
@@ -41,7 +42,8 @@ import coil3.compose.AsyncImage
 import com.klyxdevs.rickmortyapp.domain.model.CharacterModel
 import com.klyxdevs.rickmortyapp.ui.components.CircularProgressBar
 import com.klyxdevs.rickmortyapp.ui.core.extensions.vertical
-import com.klyxdevs.rickmortyapp.ui.homeScreen.tabs.characters.viewmodel.CharactersViewModel
+import com.klyxdevs.rickmortyapp.ui.core.navigation.CharacterDetailRoute
+import com.klyxdevs.rickmortyapp.ui.screens.homeScreen.tabs.characters.viewmodel.CharactersViewModel
 import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
@@ -50,17 +52,24 @@ import rickmortyapp.composeapp.generated.resources.rickface
 
 @OptIn(KoinExperimentalAPI::class)
 @Composable
-fun CharactersScreen() {
+fun CharactersScreen(mainNavHostController: NavHostController) {
     val charactersViewModel = koinViewModel<CharactersViewModel>()
     val state by charactersViewModel.state.collectAsState()
     val characters: LazyPagingItems<CharacterModel> = state.characters.collectAsLazyPagingItems()
-    CharactersGridList(state, characters)
+    CharactersGridList(state, characters) { characterModel ->
+        mainNavHostController.navigate(
+            CharacterDetailRoute(
+                characterModel.toCharacterDetail().encodingObject()
+            )
+        )
+    }
 }
 
 @Composable
 fun CharactersGridList(
     state: CharacterState,
-    characters: LazyPagingItems<CharacterModel>
+    characters: LazyPagingItems<CharacterModel>,
+    onSelectItem: (CharacterModel) -> Unit
 ) {
     Column {
         Text(
@@ -78,7 +87,7 @@ fun CharactersGridList(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             item(span = { GridItemSpan(2) }) {
-                CharacterOfTheDay(state.characterOfTheDay)
+                CharacterOfTheDay(state.characterOfTheDay){onSelectItem(it)}
             }
             when {
                 characters.loadState.refresh is LoadState.Loading && characters.itemCount == 0 -> {
@@ -99,9 +108,10 @@ fun CharactersGridList(
                     // Recorremos los items
                     items(characters.itemCount) { pos ->
                         characters[pos]?.let { characterModel ->
-                            CharacterItemList(characterModel)
+                            CharacterItemList(characterModel) { onSelectItem(it) }
                         }
                     }
+                    // carga final
                     if (characters.loadState.append is LoadState.Loading) {
                         item(span = { GridItemSpan(2) }) {
                             CircularProgressBar(color = Green)
@@ -118,12 +128,12 @@ fun CharactersGridList(
 }
 
 @Composable
-fun CharacterItemList(characterModel: CharacterModel) {
+fun CharacterItemList(characterModel: CharacterModel, onSelectItem: (CharacterModel) -> Unit) {
     Box(
         modifier = Modifier.clip(RoundedCornerShape(24))
             .border(2.dp, Green, shape = RoundedCornerShape(0, 24, 0, 24)).fillMaxWidth()
             .height(150.dp)
-            .clickable { },
+            .clickable { onSelectItem(characterModel) },
         contentAlignment = Alignment.BottomCenter
     ) {
         AsyncImage(
@@ -153,9 +163,9 @@ fun CharacterItemList(characterModel: CharacterModel) {
 
 
 @Composable
-fun CharacterOfTheDay(characterModel: CharacterModel? = null) {
+fun CharacterOfTheDay(characterModel: CharacterModel? = null , onSelectItem: (CharacterModel) -> Unit) {
     Card(
-        modifier = Modifier.fillMaxWidth().height(400.dp), shape = RoundedCornerShape(12)
+        modifier = Modifier.fillMaxWidth().height(400.dp).clickable { onSelectItem(characterModel!!) }, shape = RoundedCornerShape(12)
     ) {
         if (characterModel == null) {
             CircularProgressBar(color = Green)

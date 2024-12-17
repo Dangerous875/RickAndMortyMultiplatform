@@ -7,18 +7,25 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Green
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.unit.dp
+import com.klyxdevs.rickmortyapp.ui.screens.characterDetailScreen.model.CharacterDetail
+import kotlinx.serialization.json.Json
 
 fun Modifier.vertical() = layout { measurable, constraints ->
     val placeable = measurable.measure(constraints)
-    layout(placeable.height, placeable.width){
+    layout(placeable.height, placeable.width) {
         placeable.place(
-            x = -(placeable.width/2 - placeable.height/2),
-            y = -(placeable.height/2 - placeable.width/2)
+            x = -(placeable.width / 2 - placeable.height / 2),
+            y = -(placeable.height / 2 - placeable.width / 2)
         )
     }
 }
 
-fun Modifier.aliveBorder(isAlive:Boolean):Modifier{
-    val color = if(isAlive) Green else Color.Red
+fun Modifier.aliveBorder(isAlive: Boolean): Modifier {
+    val color = if (isAlive) Green else Color.Red
     return border(4.dp, color, CircleShape)
 }
+
+fun String.decodingObject(): CharacterDetail {
+    return Json.decodeFromString<CharacterDetail>(this)
+}
+

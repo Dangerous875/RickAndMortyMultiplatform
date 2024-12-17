@@ -85,6 +85,7 @@ kotlin {
             //Room
             implementation(libs.room.runtime)
             implementation(libs.androidx.sqlite.bundled)
+            api(libs.compose.webview.multiplatform)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)

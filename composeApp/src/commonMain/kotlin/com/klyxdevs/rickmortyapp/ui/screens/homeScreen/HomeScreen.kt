@@ -1,4 +1,4 @@
-package com.klyxdevs.rickmortyapp.ui.homeScreen
+package com.klyxdevs.rickmortyapp.ui.screens.homeScreen
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
@@ -17,12 +17,12 @@ import com.klyxdevs.rickmortyapp.ui.core.navigation.bottomnavigation.BottomBarIt
 import com.klyxdevs.rickmortyapp.ui.core.navigation.bottomnavigation.NavigationBottomWrapper
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(mainNavHostController: NavHostController) {
     val items = listOf(BottomBarItem.Episodes, BottomBarItem.Characters)
     val navControllerNavBar = rememberNavController()
     Scaffold(bottomBar = { BottomNavigation(items, navControllerNavBar) }) { padding ->
         Box(modifier = Modifier.padding(padding)) {
-            NavigationBottomWrapper(navControllerNavBar)
+            NavigationBottomWrapper(mainNavHostController,navControllerNavBar)
         }
     }
 }
