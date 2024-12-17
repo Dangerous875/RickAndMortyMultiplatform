@@ -7,11 +7,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
-import com.klyxdevs.rickmortyapp.domain.model.CharacterModel
+import com.klyxdevs.rickmortyapp.ui.characterDetailScreen.model.CharacterDetail
 
 @Composable
-fun CharacterDetailScreen(){
+fun CharacterDetailScreen(characterDetail: CharacterDetail,navController: NavController){
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
-        Text("characterModel.name")
+        Text(characterDetail.name)
     }
 }

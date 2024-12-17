@@ -1,6 +1,14 @@
 package com.klyxdevs.rickmortyapp.domain.model
 
-import kotlinx.serialization.Serializable
+import com.klyxdevs.rickmortyapp.ui.characterDetailScreen.model.CharacterDetail
 
-@Serializable
-data class CharacterModel(val id: String, val isAlive: Boolean, val image: String, val name: String)
+data class CharacterModel(
+    val id: String,
+    val isAlive: Boolean,
+    val image: String,
+    val name: String
+) {
+    fun toCharacterDetail(): CharacterDetail {
+        return CharacterDetail(id, isAlive, image, name)
+    }
+}

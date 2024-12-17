@@ -52,7 +52,7 @@ import rickmortyapp.composeapp.generated.resources.rickface
 
 @OptIn(KoinExperimentalAPI::class)
 @Composable
-fun CharactersScreen( mainNavHostController: NavHostController) {
+fun CharactersScreen(mainNavHostController: NavHostController) {
     val charactersViewModel = koinViewModel<CharactersViewModel>()
     val state by charactersViewModel.state.collectAsState()
     val characters: LazyPagingItems<CharacterModel> = state.characters.collectAsLazyPagingItems()
@@ -127,7 +127,7 @@ fun CharacterItemList(characterModel: CharacterModel, mainNavHostController: Nav
         modifier = Modifier.clip(RoundedCornerShape(24))
             .border(2.dp, Green, shape = RoundedCornerShape(0, 24, 0, 24)).fillMaxWidth()
             .height(150.dp)
-            .clickable { mainNavHostController.navigate(CharacterDetailRoute) },
+            .clickable { mainNavHostController.navigate(CharacterDetailRoute(characterModel.toCharacterDetail())) },
         contentAlignment = Alignment.BottomCenter
     ) {
         AsyncImage(

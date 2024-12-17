@@ -16,9 +16,8 @@ fun NavigationWrapper() {
     NavHost(navController = navController, startDestination = HomeScreenRoute) {
         composable<HomeScreenRoute> { HomeScreen(navController) }
         composable<CharacterDetailRoute> {
-//            val safeArgs = it.toRoute<CharacterDetailRoute>()
-//            CharacterDetailScreen(safeArgs.characterModel,navController)
-            CharacterDetailScreen()
+            val safeArgs = it.toRoute<CharacterDetailRoute>()
+            CharacterDetailScreen(safeArgs.characterDetail,navController)
         }
     }
 }
