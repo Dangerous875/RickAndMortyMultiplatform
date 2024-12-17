@@ -7,13 +7,15 @@ import com.klyxdevs.rickmortyapp.domain.model.EpisodeModel
 import kotlinx.coroutines.flow.Flow
 
 interface Repository {
-    suspend fun getSingleCharacter(id : String): CharacterModel
+    suspend fun getSingleCharacter(id: String): CharacterModel
 
-    fun getAllCharacters():Flow<PagingData<CharacterModel>>
+    fun getAllCharacters(): Flow<PagingData<CharacterModel>>
 
     suspend fun getCharacterDB(): CharacterOfTheDayModel?
 
     suspend fun saveCharacter(characterOfTheDayModel: CharacterOfTheDayModel)
 
     fun getAllEpisodes(): Flow<PagingData<EpisodeModel>>
+
+    suspend fun getEpisodesForCharacter(episodes: List<String>): List<EpisodeModel>
 }

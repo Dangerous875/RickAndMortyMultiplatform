@@ -10,7 +10,10 @@ data class CharacterDetail(
     val isAlive: Boolean,
     val image: String,
     val name: String,
-    val species : String
+    val species : String,
+    val gender:String,
+    val origin: String,
+    val episode:List<String>
 ) {
     fun encodingObject(): String {
         return Json.encodeToString(this)

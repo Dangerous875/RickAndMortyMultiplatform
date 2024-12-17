@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "86b893a286c7dcb24eb2e10e3a357531",
+    "identityHash": "50543c496ed14d7dbb2ecade451a3d44",
     "entities": [
       {
         "tableName": "characteroftheday",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `isAlive` INTEGER NOT NULL, `image` TEXT NOT NULL, `name` TEXT NOT NULL, `selectedDate` TEXT NOT NULL, `species` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `isAlive` INTEGER NOT NULL, `image` TEXT NOT NULL, `name` TEXT NOT NULL, `selectedDate` TEXT NOT NULL, `species` TEXT NOT NULL, `gender` TEXT NOT NULL, `origin` TEXT NOT NULL, `episode` TEXT NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -43,6 +43,24 @@
             "columnName": "species",
             "affinity": "TEXT",
             "notNull": true
+          },
+          {
+            "fieldPath": "gender",
+            "columnName": "gender",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "origin",
+            "columnName": "origin",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "episode",
+            "columnName": "episode",
+            "affinity": "TEXT",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -55,7 +73,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '86b893a286c7dcb24eb2e10e3a357531')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '50543c496ed14d7dbb2ecade451a3d44')"
     ]
   }
 }

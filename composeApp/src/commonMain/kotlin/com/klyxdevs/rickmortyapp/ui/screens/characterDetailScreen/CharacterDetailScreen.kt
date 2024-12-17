@@ -17,6 +17,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -34,6 +36,8 @@ import androidx.navigation.NavController
 import co.touchlab.kermit.Logger
 import coil3.compose.AsyncImage
 import com.klyxdevs.rickmortyapp.domain.model.EpisodeModel
+import com.klyxdevs.rickmortyapp.ui.components.CircularProgressBar
+import com.klyxdevs.rickmortyapp.ui.components.TextTitle
 import com.klyxdevs.rickmortyapp.ui.core.extensions.aliveBorder
 import com.klyxdevs.rickmortyapp.ui.core.extensions.decodingObject
 import com.klyxdevs.rickmortyapp.ui.screens.characterDetailScreen.model.CharacterDetail
@@ -67,37 +71,37 @@ fun CharacterDetailScreen(characterDetail: String, navController: NavController)
                     Color.Black
                 )
         ) {
-//            CharacterInformation(uiState.characterDetail)
-//            CharacterEpisodesList(uiState.episodes)
+            CharacterInformation(uiState.characterDetail)
+            CharacterEpisodesList(uiState.episodes)
         }
 
     }
 
 }
 
-//@Composable
-//fun CharacterEpisodesList(episodes: List<EpisodeModel>?) {
-//    ElevatedCard(
-//        modifier = Modifier.padding(horizontal = 16.dp).fillMaxWidth(),
-//        colors = CardDefaults.elevatedCardColors().copy(containerColor = Color.Magenta)
-//    ) {
-//        Box(modifier = Modifier.padding(16.dp), contentAlignment = Alignment.Center) {
-//            if (episodes == null) {
-//                CircularProgressBar(color = Color.Green)
-//            } else {
-//                Column {
-//                    TextTitle("Episode list")
-//                    Spacer(Modifier.height(6.dp))
-//
-//                    episodes.forEach { episode ->
-//                        EpisodeItem(episode)
-//                        Spacer(Modifier.height(4.dp))
-//                    }
-//                }
-//            }
-//        }
-//    }
-//}
+@Composable
+fun CharacterEpisodesList(episodes: List<EpisodeModel>?) {
+    ElevatedCard(
+        modifier = Modifier.padding(horizontal = 16.dp).fillMaxWidth(),
+        colors = CardDefaults.elevatedCardColors().copy(containerColor = Color.Magenta)
+    ) {
+        Box(modifier = Modifier.padding(16.dp), contentAlignment = Alignment.Center) {
+            if (episodes == null) {
+                CircularProgressBar(color = Green)
+            } else {
+                Column {
+                    TextTitle("Episode list")
+                    Spacer(Modifier.height(6.dp))
+
+                    episodes.forEach { episode ->
+                        EpisodeItem(episode)
+                        Spacer(Modifier.height(4.dp))
+                    }
+                }
+            }
+        }
+    }
+}
 
 @Composable
 fun EpisodeItem(episode: EpisodeModel) {
@@ -105,21 +109,21 @@ fun EpisodeItem(episode: EpisodeModel) {
     Text(episode.episode, color = Color.Black)
 }
 
-//@Composable
-//fun CharacterInformation(characterDetail: CharacterDetail) {
-//    ElevatedCard(
-//        modifier = Modifier.padding(16.dp).fillMaxWidth(),
-//        colors = CardDefaults.elevatedCardColors().copy(containerColor = Color.Magenta)
-//    ) {
-//        Column(modifier = Modifier.padding(16.dp)) {
-//            TextTitle("About the character")
-//            Spacer(Modifier.height(6.dp))
-//            InformationDetail("Origin", characterModel.origin)
-//            Spacer(Modifier.height(2.dp))
-//            InformationDetail("Gender", characterModel.gender)
-//        }
-//    }
-//}
+@Composable
+fun CharacterInformation(characterDetail: CharacterDetail) {
+    ElevatedCard(
+        modifier = Modifier.padding(16.dp).fillMaxWidth(),
+        colors = CardDefaults.elevatedCardColors().copy(containerColor = Color.Magenta)
+    ) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            TextTitle("About the character")
+            Spacer(Modifier.height(6.dp))
+            InformationDetail("Origin", characterDetail.origin)
+            Spacer(Modifier.height(2.dp))
+            InformationDetail("Gender", characterDetail.gender)
+        }
+    }
+}
 
 @Composable
 fun InformationDetail(title: String, detail: String) {

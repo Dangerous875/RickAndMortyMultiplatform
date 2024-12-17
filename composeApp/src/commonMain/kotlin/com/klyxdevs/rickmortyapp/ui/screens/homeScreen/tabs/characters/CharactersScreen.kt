@@ -87,7 +87,7 @@ fun CharactersGridList(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             item(span = { GridItemSpan(2) }) {
-                CharacterOfTheDay(state.characterOfTheDay)
+                CharacterOfTheDay(state.characterOfTheDay){onSelectItem(it)}
             }
             when {
                 characters.loadState.refresh is LoadState.Loading && characters.itemCount == 0 -> {
@@ -163,9 +163,9 @@ fun CharacterItemList(characterModel: CharacterModel, onSelectItem: (CharacterMo
 
 
 @Composable
-fun CharacterOfTheDay(characterModel: CharacterModel? = null) {
+fun CharacterOfTheDay(characterModel: CharacterModel? = null , onSelectItem: (CharacterModel) -> Unit) {
     Card(
-        modifier = Modifier.fillMaxWidth().height(400.dp), shape = RoundedCornerShape(12)
+        modifier = Modifier.fillMaxWidth().height(400.dp).clickable { onSelectItem(characterModel!!) }, shape = RoundedCornerShape(12)
     ) {
         if (characterModel == null) {
             CircularProgressBar(color = Green)

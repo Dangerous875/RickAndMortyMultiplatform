@@ -18,5 +18,16 @@ import com.klyxdevs.rickmortyapp.ui.screens.homeScreen.tabs.characters.Character
 )
 @Composable
 fun PreviewScreen() {
-    CharacterOfTheDay(CharacterModel(id = "22", isAlive = true, name = "pepeppepepepepepeep", image = "", species = ""))
+//    CharacterOfTheDay(
+//        CharacterModel(
+//            id = "22",
+//            isAlive = true,
+//            name = "pepeppepepepepepeep",
+//            image = "",
+//            species = "",
+//            gender = "",
+//            origin = "",
+//            episode = listOf("")
+//        )
+//    )
 }
