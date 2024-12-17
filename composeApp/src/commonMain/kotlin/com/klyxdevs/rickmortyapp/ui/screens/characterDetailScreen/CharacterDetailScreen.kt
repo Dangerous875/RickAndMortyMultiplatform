@@ -1,4 +1,4 @@
-package com.klyxdevs.rickmortyapp.ui.characterDetailScreen
+package com.klyxdevs.rickmortyapp.ui.screens.characterDetailScreen
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

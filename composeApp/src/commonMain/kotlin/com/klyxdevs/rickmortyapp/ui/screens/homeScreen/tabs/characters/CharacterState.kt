@@ -1,4 +1,4 @@
-package com.klyxdevs.rickmortyapp.ui.homeScreen.tabs.characters
+package com.klyxdevs.rickmortyapp.ui.screens.homeScreen.tabs.characters
 
 import androidx.paging.PagingData
 import com.klyxdevs.rickmortyapp.domain.model.CharacterModel

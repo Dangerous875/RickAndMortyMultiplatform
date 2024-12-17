@@ -1,11 +1,11 @@
-package com.klyxdevs.rickmortyapp.ui.homeScreen.tabs.characters.viewmodel
+package com.klyxdevs.rickmortyapp.ui.screens.homeScreen.tabs.characters.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.klyxdevs.rickmortyapp.domain.GetAllCharactersUseCase
 import com.klyxdevs.rickmortyapp.domain.GetRandomCharacterUseCase
-import com.klyxdevs.rickmortyapp.ui.homeScreen.tabs.characters.CharacterState
+import com.klyxdevs.rickmortyapp.ui.screens.homeScreen.tabs.characters.CharacterState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.MutableStateFlow

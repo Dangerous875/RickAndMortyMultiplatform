@@ -1,4 +1,4 @@
-package com.klyxdevs.rickmortyapp.ui.homeScreen
+package com.klyxdevs.rickmortyapp.ui.screens.homeScreen
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding

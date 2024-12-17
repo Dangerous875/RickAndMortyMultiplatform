@@ -1,10 +1,10 @@
-package com.klyxdevs.rickmortyapp.ui.homeScreen.tabs.episodes.viewmodel
+package com.klyxdevs.rickmortyapp.ui.screens.homeScreen.tabs.episodes.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.klyxdevs.rickmortyapp.domain.Repository
-import com.klyxdevs.rickmortyapp.ui.homeScreen.tabs.episodes.EpisodesState
+import com.klyxdevs.rickmortyapp.ui.screens.homeScreen.tabs.episodes.EpisodesState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update

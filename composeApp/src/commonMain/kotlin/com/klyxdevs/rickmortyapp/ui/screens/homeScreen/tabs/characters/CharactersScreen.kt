@@ -1,4 +1,4 @@
-package com.klyxdevs.rickmortyapp.ui.homeScreen.tabs.characters
+package com.klyxdevs.rickmortyapp.ui.screens.homeScreen.tabs.characters
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -43,7 +43,7 @@ import com.klyxdevs.rickmortyapp.domain.model.CharacterModel
 import com.klyxdevs.rickmortyapp.ui.components.CircularProgressBar
 import com.klyxdevs.rickmortyapp.ui.core.extensions.vertical
 import com.klyxdevs.rickmortyapp.ui.core.navigation.CharacterDetailRoute
-import com.klyxdevs.rickmortyapp.ui.homeScreen.tabs.characters.viewmodel.CharactersViewModel
+import com.klyxdevs.rickmortyapp.ui.screens.homeScreen.tabs.characters.viewmodel.CharactersViewModel
 import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI

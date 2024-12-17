@@ -1,6 +1,6 @@
 package com.klyxdevs.rickmortyapp.domain.model
 
-import com.klyxdevs.rickmortyapp.ui.characterDetailScreen.model.CharacterDetail
+import com.klyxdevs.rickmortyapp.ui.screens.characterDetailScreen.model.CharacterDetail
 
 data class CharacterModel(
     val id: String,

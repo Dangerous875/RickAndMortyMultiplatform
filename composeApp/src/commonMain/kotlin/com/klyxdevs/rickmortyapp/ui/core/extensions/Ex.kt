@@ -7,7 +7,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Green
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.unit.dp
-import com.klyxdevs.rickmortyapp.ui.characterDetailScreen.model.CharacterDetail
+import com.klyxdevs.rickmortyapp.ui.screens.characterDetailScreen.model.CharacterDetail
 import kotlinx.serialization.json.Json
 
 fun Modifier.vertical() = layout { measurable, constraints ->

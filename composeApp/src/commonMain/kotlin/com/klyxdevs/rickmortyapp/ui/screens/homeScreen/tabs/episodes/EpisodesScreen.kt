@@ -1,4 +1,4 @@
-package com.klyxdevs.rickmortyapp.ui.homeScreen.tabs.episodes
+package com.klyxdevs.rickmortyapp.ui.screens.homeScreen.tabs.episodes
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
@@ -40,7 +40,7 @@ import com.klyxdevs.rickmortyapp.ui.components.CircularProgressBar
 import com.klyxdevs.rickmortyapp.ui.components.PagingType
 import com.klyxdevs.rickmortyapp.ui.components.PagingWrapper
 import com.klyxdevs.rickmortyapp.ui.components.VideoPlayer
-import com.klyxdevs.rickmortyapp.ui.homeScreen.tabs.episodes.viewmodel.EpisodesViewModel
+import com.klyxdevs.rickmortyapp.ui.screens.homeScreen.tabs.episodes.viewmodel.EpisodesViewModel
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.viewmodel.koinViewModel

@@ -1,4 +1,4 @@
-package com.klyxdevs.rickmortyapp.ui.characterDetailScreen.model
+package com.klyxdevs.rickmortyapp.ui.screens.characterDetailScreen.model
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
