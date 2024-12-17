@@ -7,8 +7,8 @@ data class CharacterModel(
     val isAlive: Boolean,
     val image: String,
     val name: String
-) {
+){
     fun toCharacterDetail(): CharacterDetail {
-        return CharacterDetail(id = id, isAlive = isAlive, image = image, name = name)
+        return CharacterDetail(id = id, name = name, isAlive = isAlive, image = image)
     }
 }

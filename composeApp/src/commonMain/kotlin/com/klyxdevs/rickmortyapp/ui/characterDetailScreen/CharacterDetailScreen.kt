@@ -7,12 +7,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
-import com.klyxdevs.rickmortyapp.ui.characterDetailScreen.model.CharacterDetail
-import kotlinx.serialization.json.Json
+import co.touchlab.kermit.Logger
+import com.klyxdevs.rickmortyapp.ui.core.extensions.decodingObject
 
 @Composable
 fun CharacterDetailScreen(characterDetail: String, navController: NavController) {
-    val character = Json.decodeFromString<CharacterDetail>(characterDetail)
+    Logger.i("DecoderFunction -> $characterDetail")
+    val character = characterDetail.decodingObject()
+    Logger.i("DecoderFunction -> $character")
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Text(character.name)
     }

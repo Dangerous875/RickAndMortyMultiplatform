@@ -56,14 +56,20 @@ fun CharactersScreen(mainNavHostController: NavHostController) {
     val charactersViewModel = koinViewModel<CharactersViewModel>()
     val state by charactersViewModel.state.collectAsState()
     val characters: LazyPagingItems<CharacterModel> = state.characters.collectAsLazyPagingItems()
-    CharactersGridList(state, characters, mainNavHostController)
+    CharactersGridList(state, characters) { characterModel ->
+        mainNavHostController.navigate(
+            CharacterDetailRoute(
+                characterModel.toCharacterDetail().encodingObject()
+            )
+        )
+    }
 }
 
 @Composable
 fun CharactersGridList(
     state: CharacterState,
     characters: LazyPagingItems<CharacterModel>,
-    mainNavHostController: NavHostController
+    onSelectItem: (CharacterModel) -> Unit
 ) {
     Column {
         Text(
@@ -102,7 +108,7 @@ fun CharactersGridList(
                     // Recorremos los items
                     items(characters.itemCount) { pos ->
                         characters[pos]?.let { characterModel ->
-                            CharacterItemList(characterModel, mainNavHostController)
+                            CharacterItemList(characterModel) { onSelectItem(it) }
                         }
                     }
                     // carga final
@@ -122,18 +128,12 @@ fun CharactersGridList(
 }
 
 @Composable
-fun CharacterItemList(characterModel: CharacterModel, mainNavHostController: NavHostController) {
+fun CharacterItemList(characterModel: CharacterModel, onSelectItem: (CharacterModel) -> Unit) {
     Box(
         modifier = Modifier.clip(RoundedCornerShape(24))
             .border(2.dp, Green, shape = RoundedCornerShape(0, 24, 0, 24)).fillMaxWidth()
             .height(150.dp)
-            .clickable {
-                mainNavHostController.navigate(
-                    CharacterDetailRoute(
-                        characterModel.toCharacterDetail().encodingObject()
-                    )
-                )
-            },
+            .clickable { onSelectItem(characterModel) },
         contentAlignment = Alignment.BottomCenter
     ) {
         AsyncImage(
