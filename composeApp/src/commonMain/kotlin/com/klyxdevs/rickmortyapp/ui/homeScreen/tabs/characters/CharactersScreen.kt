@@ -34,6 +34,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import androidx.paging.LoadState
 import app.cash.paging.compose.LazyPagingItems
 import app.cash.paging.compose.collectAsLazyPagingItems
@@ -41,6 +42,7 @@ import coil3.compose.AsyncImage
 import com.klyxdevs.rickmortyapp.domain.model.CharacterModel
 import com.klyxdevs.rickmortyapp.ui.components.CircularProgressBar
 import com.klyxdevs.rickmortyapp.ui.core.extensions.vertical
+import com.klyxdevs.rickmortyapp.ui.core.navigation.CharacterDetailRoute
 import com.klyxdevs.rickmortyapp.ui.homeScreen.tabs.characters.viewmodel.CharactersViewModel
 import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.viewmodel.koinViewModel
@@ -50,17 +52,18 @@ import rickmortyapp.composeapp.generated.resources.rickface
 
 @OptIn(KoinExperimentalAPI::class)
 @Composable
-fun CharactersScreen() {
+fun CharactersScreen( mainNavHostController: NavHostController) {
     val charactersViewModel = koinViewModel<CharactersViewModel>()
     val state by charactersViewModel.state.collectAsState()
     val characters: LazyPagingItems<CharacterModel> = state.characters.collectAsLazyPagingItems()
-    CharactersGridList(state, characters)
+    CharactersGridList(state, characters, mainNavHostController)
 }
 
 @Composable
 fun CharactersGridList(
     state: CharacterState,
-    characters: LazyPagingItems<CharacterModel>
+    characters: LazyPagingItems<CharacterModel>,
+    mainNavHostController: NavHostController
 ) {
     Column {
         Text(
@@ -99,7 +102,7 @@ fun CharactersGridList(
                     // Recorremos los items
                     items(characters.itemCount) { pos ->
                         characters[pos]?.let { characterModel ->
-                            CharacterItemList(characterModel)
+                            CharacterItemList(characterModel, mainNavHostController)
                         }
                     }
                     // carga final
@@ -119,12 +122,12 @@ fun CharactersGridList(
 }
 
 @Composable
-fun CharacterItemList(characterModel: CharacterModel) {
+fun CharacterItemList(characterModel: CharacterModel, mainNavHostController: NavHostController) {
     Box(
         modifier = Modifier.clip(RoundedCornerShape(24))
             .border(2.dp, Green, shape = RoundedCornerShape(0, 24, 0, 24)).fillMaxWidth()
             .height(150.dp)
-            .clickable { },
+            .clickable { mainNavHostController.navigate(CharacterDetailRoute) },
         contentAlignment = Alignment.BottomCenter
     ) {
         AsyncImage(

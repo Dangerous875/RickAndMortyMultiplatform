@@ -1,15 +1,21 @@
 package com.klyxdevs.rickmortyapp.ui.homeScreen.tabs.episodes
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -40,6 +46,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 import rickmortyapp.composeapp.generated.resources.Res
+import rickmortyapp.composeapp.generated.resources.portal
 import rickmortyapp.composeapp.generated.resources.season1
 import rickmortyapp.composeapp.generated.resources.season2
 import rickmortyapp.composeapp.generated.resources.season3
@@ -63,18 +70,35 @@ fun EpisodesScreen() {
             initialView = { CircularProgressBar(color = Color.Green.copy(alpha = 0.5f)) },
             itemView = { EpisodesItemList(it) { url -> episodesViewModel.onPlaySelected(url) } })
 
-        if (state.playVideo.isNotBlank()) {
-            ElevatedCard(modifier = Modifier.fillMaxWidth().height(250.dp).padding(16.dp)) {
-                Box(modifier = Modifier.background(Color.Black)) {
-                    Box(modifier = Modifier.padding(16.dp), contentAlignment = Alignment.Center) {
-                        VideoPlayer(Modifier.fillMaxWidth().height(200.dp), state.playVideo)
-                    }
+        EpisodePlayer(state) { episodesViewModel.onCloseVideo() }
+    }
+
+
+}
+
+@Composable
+private fun EpisodePlayer(state: EpisodesState, onCloseVideo: () -> Unit) {
+    AnimatedVisibility(state.playVideo.isNotBlank()) {
+        ElevatedCard(
+            modifier = Modifier.fillMaxWidth().height(250.dp).padding(16.dp)
+                .border(3.dp, Color.Green, CardDefaults.elevatedShape)
+        ) {
+            Box(modifier = Modifier.background(Color.Black)) {
+                Box(modifier = Modifier.padding(16.dp), contentAlignment = Alignment.Center) {
+                    VideoPlayer(Modifier.fillMaxWidth().height(200.dp), state.playVideo)
+                }
+                Row {
+                    Spacer(modifier = Modifier.weight(1f))
+                    Image(
+                        painter = painterResource(Res.drawable.portal),
+                        contentDescription = null,
+                        modifier = Modifier.padding(8.dp).size(40.dp)
+                            .clickable { onCloseVideo() }
+                    )
                 }
             }
         }
     }
-
-
 }
 
 @Composable

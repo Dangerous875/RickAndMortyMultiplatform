@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 object HomeScreenRoute
 
 @Serializable
-data class TestScreenRoute(val string: String)
+object CharacterDetailRoute
 
 // BottomNav
 
