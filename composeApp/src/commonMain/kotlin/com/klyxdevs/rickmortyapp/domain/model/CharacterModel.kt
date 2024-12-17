@@ -9,6 +9,6 @@ data class CharacterModel(
     val name: String
 ) {
     fun toCharacterDetail(): CharacterDetail {
-        return CharacterDetail(id, isAlive, image, name)
+        return CharacterDetail(id = id, isAlive = isAlive, image = image, name = name)
     }
 }

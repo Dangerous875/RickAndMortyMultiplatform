@@ -127,7 +127,13 @@ fun CharacterItemList(characterModel: CharacterModel, mainNavHostController: Nav
         modifier = Modifier.clip(RoundedCornerShape(24))
             .border(2.dp, Green, shape = RoundedCornerShape(0, 24, 0, 24)).fillMaxWidth()
             .height(150.dp)
-            .clickable { mainNavHostController.navigate(CharacterDetailRoute(characterModel.toCharacterDetail())) },
+            .clickable {
+                mainNavHostController.navigate(
+                    CharacterDetailRoute(
+                        characterModel.toCharacterDetail().encodingObject()
+                    )
+                )
+            },
         contentAlignment = Alignment.BottomCenter
     ) {
         AsyncImage(
