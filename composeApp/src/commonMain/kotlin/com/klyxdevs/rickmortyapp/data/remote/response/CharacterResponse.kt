@@ -9,7 +9,8 @@ data class CharacterResponse(
     val status: String,
     val image: String,
     val name : String,
-    val species:String
+    val species:String,
+    val gender:String
 ) {
     fun toDomain(): CharacterModel {
         return CharacterModel(
