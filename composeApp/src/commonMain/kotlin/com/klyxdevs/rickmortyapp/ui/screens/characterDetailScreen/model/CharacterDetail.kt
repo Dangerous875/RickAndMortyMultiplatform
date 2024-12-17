@@ -9,7 +9,8 @@ data class CharacterDetail(
     val id: String,
     val isAlive: Boolean,
     val image: String,
-    val name: String
+    val name: String,
+    val species : String
 ) {
     fun encodingObject(): String {
         return Json.encodeToString(this)

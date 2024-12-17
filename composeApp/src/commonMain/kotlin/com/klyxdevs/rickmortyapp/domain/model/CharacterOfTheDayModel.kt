@@ -5,11 +5,12 @@ import com.klyxdevs.rickmortyapp.data.database.entity.CharacterOfTheDayEntity
 data class CharacterOfTheDayModel(val characterModel: CharacterModel, val selectedDate: String) {
     fun toEntity(): CharacterOfTheDayEntity {
         return CharacterOfTheDayEntity(
-            characterModel.id,
-            characterModel.isAlive,
-            characterModel.image,
-            characterModel.name,
-            selectedDate
+            id = characterModel.id,
+            isAlive = characterModel.isAlive,
+            image = characterModel.image,
+            name = characterModel.name,
+            species = characterModel.species,
+            selectedDate = selectedDate
         )
     }
 }
