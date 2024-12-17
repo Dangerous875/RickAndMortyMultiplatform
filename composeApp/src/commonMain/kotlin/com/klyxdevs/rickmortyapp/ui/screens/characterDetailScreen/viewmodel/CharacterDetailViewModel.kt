@@ -2,7 +2,6 @@ package com.klyxdevs.rickmortyapp.ui.screens.characterDetailScreen.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import co.touchlab.kermit.Logger
 import com.klyxdevs.rickmortyapp.domain.GetAllEpisodesUseCase
 import com.klyxdevs.rickmortyapp.ui.screens.characterDetailScreen.model.CharacterDetail
 import com.klyxdevs.rickmortyapp.ui.screens.characterDetailScreen.model.CharacterStateDetail
