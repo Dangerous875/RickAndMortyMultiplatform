@@ -17,8 +17,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -91,7 +94,7 @@ private fun EpisodePlayer(state: EpisodesState, onCloseVideo: () -> Unit) {
     AnimatedContent(state.playVideo.isNotBlank()) { condition ->
         if (condition){
             ElevatedCard(
-                modifier = Modifier.fillMaxWidth().height(250.dp).padding(horizontal = 16.dp, vertical = 24.dp)
+                modifier = Modifier.fillMaxWidth().height(250.dp).padding(start = 16.dp , end = 16.dp , top = 32.dp)
                     .border(3.dp, Color.Green, CardDefaults.elevatedShape)
             ) {
                 Box(modifier = Modifier.background(Color.Black)) {
@@ -100,18 +103,27 @@ private fun EpisodePlayer(state: EpisodesState, onCloseVideo: () -> Unit) {
                     }
                     Row {
                         Spacer(modifier = Modifier.weight(1f))
-                        Image(
-                            painter = painterResource(Res.drawable.portal),
-                            contentDescription = null,
-                            modifier = Modifier.padding(8.dp).size(40.dp)
-                                .clickable { onCloseVideo() }
-                        )
+                        Box(contentAlignment = Alignment.Center){
+                            Image(
+                                painter = painterResource(Res.drawable.portal),
+                                contentDescription = null,
+                                modifier = Modifier.padding(8.dp).size(40.dp)
+                                    .clickable { onCloseVideo() }
+                            )
+                            Icon(
+                                imageVector = Icons.Default.Close,
+                                tint = Green,
+                                contentDescription = null,
+                                modifier = Modifier.padding(8.dp).size(32.dp)
+                                    .clickable { onCloseVideo() }
+                            )
+                        }
                     }
                 }
             }
         }else{
             ElevatedCard(
-                modifier = Modifier.fillMaxWidth().padding(16.dp),
+                modifier = Modifier.fillMaxWidth().padding(start = 16.dp , end = 16.dp , top = 32.dp),
                 colors = CardDefaults.elevatedCardColors().copy(containerColor = PlaceholderColor)
             ) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
