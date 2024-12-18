@@ -38,6 +38,11 @@ import coil3.compose.AsyncImage
 import com.klyxdevs.rickmortyapp.domain.model.EpisodeModel
 import com.klyxdevs.rickmortyapp.ui.components.CircularProgressBar
 import com.klyxdevs.rickmortyapp.ui.components.TextTitle
+import com.klyxdevs.rickmortyapp.ui.core.colors.BackgroundPrimaryColor
+import com.klyxdevs.rickmortyapp.ui.core.colors.BackgroundSecondaryColor
+import com.klyxdevs.rickmortyapp.ui.core.colors.BackgroundTertiaryColor
+import com.klyxdevs.rickmortyapp.ui.core.colors.DefaultTextColor
+import com.klyxdevs.rickmortyapp.ui.core.colors.Pink
 import com.klyxdevs.rickmortyapp.ui.core.extensions.aliveBorder
 import com.klyxdevs.rickmortyapp.ui.core.extensions.decodingObject
 import com.klyxdevs.rickmortyapp.ui.screens.characterDetailScreen.model.CharacterDetail
@@ -60,7 +65,7 @@ fun CharacterDetailScreen(characterDetail: String, navController: NavController)
     val scrollState = rememberScrollState()
 
     Column(
-        modifier = Modifier.fillMaxSize().background(Color.White)
+        modifier = Modifier.fillMaxSize().background(BackgroundPrimaryColor)
             .verticalScroll(scrollState)
     ) {
         MainHeader(uiState.characterDetail, {})  /*onBackPressed*/
@@ -68,7 +73,7 @@ fun CharacterDetailScreen(characterDetail: String, navController: NavController)
         Column(
             modifier = Modifier.fillMaxSize()
                 .clip(RoundedCornerShape(topStartPercent = 10, topEndPercent = 10)).background(
-                    Color.Black
+                    BackgroundSecondaryColor
                 )
         ) {
             CharacterInformation(uiState.characterDetail)
@@ -83,7 +88,7 @@ fun CharacterDetailScreen(characterDetail: String, navController: NavController)
 fun CharacterEpisodesList(episodes: List<EpisodeModel>?) {
     ElevatedCard(
         modifier = Modifier.padding(horizontal = 16.dp).fillMaxWidth(),
-        colors = CardDefaults.elevatedCardColors().copy(containerColor = Color.Magenta)
+        colors = CardDefaults.elevatedCardColors().copy(containerColor = BackgroundTertiaryColor)
     ) {
         Box(modifier = Modifier.padding(16.dp), contentAlignment = Alignment.Center) {
             if (episodes == null) {
@@ -106,21 +111,21 @@ fun CharacterEpisodesList(episodes: List<EpisodeModel>?) {
 @Composable
 fun EpisodeItem(episode: EpisodeModel) {
     Text(episode.name, color = Green, fontWeight = FontWeight.Bold)
-    Text(episode.episode, color = Color.Black)
+    Text(episode.episode, color = DefaultTextColor)
 }
 
 @Composable
 fun CharacterInformation(characterDetail: CharacterDetail) {
     ElevatedCard(
         modifier = Modifier.padding(16.dp).fillMaxWidth(),
-        colors = CardDefaults.elevatedCardColors().copy(containerColor = Color.Magenta)
+        colors = CardDefaults.elevatedCardColors().copy(containerColor = BackgroundTertiaryColor)
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             TextTitle("About the character")
             Spacer(Modifier.height(6.dp))
-            InformationDetail("Origin", characterDetail.origin)
+            InformationDetail("Origin: ", characterDetail.origin)
             Spacer(Modifier.height(2.dp))
-            InformationDetail("Gender", characterDetail.gender)
+            InformationDetail("Gender: ", characterDetail.gender)
         }
     }
 }
@@ -128,7 +133,7 @@ fun CharacterInformation(characterDetail: CharacterDetail) {
 @Composable
 fun InformationDetail(title: String, detail: String) {
     Row {
-        Text(title, color = Color.White, fontWeight = FontWeight.Bold)
+        Text(title, color = DefaultTextColor, fontWeight = FontWeight.Bold)
         Spacer(Modifier.width(4.dp))
         Text(detail, color = Green)
     }
@@ -167,7 +172,7 @@ fun CharacterHeader(characterDetail: CharacterDetail) {
         ) {
             Text(
                 characterDetail.name,
-                color = Color.Black,
+                color = Pink,
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold
             )
