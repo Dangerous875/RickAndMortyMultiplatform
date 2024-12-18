@@ -6,7 +6,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -41,6 +40,8 @@ import app.cash.paging.compose.collectAsLazyPagingItems
 import coil3.compose.AsyncImage
 import com.klyxdevs.rickmortyapp.domain.model.CharacterModel
 import com.klyxdevs.rickmortyapp.ui.components.CircularProgressBar
+import com.klyxdevs.rickmortyapp.ui.core.colors.BackgroundPrimaryColor
+import com.klyxdevs.rickmortyapp.ui.core.colors.DefaultTextColor
 import com.klyxdevs.rickmortyapp.ui.core.extensions.vertical
 import com.klyxdevs.rickmortyapp.ui.core.navigation.CharacterDetailRoute
 import com.klyxdevs.rickmortyapp.ui.screens.homeScreen.tabs.characters.viewmodel.CharactersViewModel
@@ -74,14 +75,13 @@ fun CharactersGridList(
     Column {
         Text(
             "Characters",
-            color = Color.Black,
+            color = DefaultTextColor,
             fontSize = 24.sp,
             fontWeight = FontWeight.SemiBold,
-            modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center
+            modifier = Modifier.fillMaxWidth().padding(vertical = 2.dp).background(BackgroundPrimaryColor), textAlign = TextAlign.Center
         )
-        Spacer(Modifier.height(6.dp))
         LazyVerticalGrid(
-            modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp),
+            modifier = Modifier.fillMaxSize().background(BackgroundPrimaryColor).padding(horizontal = 16.dp),
             columns = GridCells.Fixed(2),
             horizontalArrangement = Arrangement.spacedBy(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -165,7 +165,7 @@ fun CharacterItemList(characterModel: CharacterModel, onSelectItem: (CharacterMo
 @Composable
 fun CharacterOfTheDay(characterModel: CharacterModel? = null , onSelectItem: (CharacterModel) -> Unit) {
     Card(
-        modifier = Modifier.fillMaxWidth().height(400.dp).clickable { onSelectItem(characterModel!!) }, shape = RoundedCornerShape(12)
+        modifier = Modifier.fillMaxWidth().height(400.dp).padding(top = 4.dp).clickable { onSelectItem(characterModel!!) }, shape = RoundedCornerShape(12)
     ) {
         if (characterModel == null) {
             CircularProgressBar(color = Green)
