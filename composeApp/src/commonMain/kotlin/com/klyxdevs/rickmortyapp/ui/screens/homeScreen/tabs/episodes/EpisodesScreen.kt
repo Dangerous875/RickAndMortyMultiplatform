@@ -1,7 +1,6 @@
 package com.klyxdevs.rickmortyapp.ui.screens.homeScreen.tabs.episodes
 
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -10,13 +9,16 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.CardDefaults
@@ -44,6 +46,7 @@ import com.klyxdevs.rickmortyapp.domain.model.SeasonEpisode.SEASON_5
 import com.klyxdevs.rickmortyapp.domain.model.SeasonEpisode.SEASON_6
 import com.klyxdevs.rickmortyapp.domain.model.SeasonEpisode.SEASON_7
 import com.klyxdevs.rickmortyapp.domain.model.SeasonEpisode.UNKNOWN
+import com.klyxdevs.rickmortyapp.isDesktop
 import com.klyxdevs.rickmortyapp.ui.components.CircularProgressBar
 import com.klyxdevs.rickmortyapp.ui.components.PagingType
 import com.klyxdevs.rickmortyapp.ui.components.PagingWrapper
@@ -74,16 +77,41 @@ fun EpisodesScreen() {
 
     val state by episodesViewModel.state.collectAsState()
     val episodes = state.characters.collectAsLazyPagingItems()
+    if (isDesktop()) {
+        val scrollState = rememberScrollState()
+        Column(
+            modifier = Modifier.fillMaxSize().background(BackgroundPrimaryColor)
+                .verticalScroll(scrollState), horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Spacer(modifier = Modifier.height(16.dp))
+            PagingWrapper(
+                pagingType = PagingType.ROW,
+                pagingItems = episodes,
+                initialView = { CircularProgressBar(color = Green.copy(alpha = 0.5f)) },
+                itemView = {
+                    EpisodesItemList(it) { url -> episodesViewModel.onPlaySelected(url) }
+                }
+            )
+            if (isDesktop()) {
+                Box(modifier = Modifier.fillMaxHeight().width(450.dp)) {
+                    EpisodePlayer(state) { episodesViewModel.onCloseVideo() }
+                }
+            } else {
+                EpisodePlayer(state) { episodesViewModel.onCloseVideo() }
+            }
 
-    Column(modifier = Modifier.fillMaxSize().background(BackgroundPrimaryColor)) {
-        Spacer(modifier = Modifier.height(16.dp))
-        PagingWrapper(
-            pagingType = PagingType.ROW,
-            pagingItems = episodes,
-            initialView = { CircularProgressBar(color = Color.Green.copy(alpha = 0.5f)) },
-            itemView = { EpisodesItemList(it) { url -> episodesViewModel.onPlaySelected(url) } })
+        }
+    } else {
+        Column(modifier = Modifier.fillMaxSize().background(BackgroundPrimaryColor)) {
+            Spacer(modifier = Modifier.height(16.dp))
+            PagingWrapper(
+                pagingType = PagingType.ROW,
+                pagingItems = episodes,
+                initialView = { CircularProgressBar(color = Green.copy(alpha = 0.5f)) },
+                itemView = { EpisodesItemList(it) { url -> episodesViewModel.onPlaySelected(url) } })
 
-        EpisodePlayer(state) { episodesViewModel.onCloseVideo() }
+            EpisodePlayer(state) { episodesViewModel.onCloseVideo() }
+        }
     }
 
 
@@ -92,18 +120,19 @@ fun EpisodesScreen() {
 @Composable
 private fun EpisodePlayer(state: EpisodesState, onCloseVideo: () -> Unit) {
     AnimatedContent(state.playVideo.isNotBlank()) { condition ->
-        if (condition){
+        if (condition) {
             ElevatedCard(
-                modifier = Modifier.fillMaxWidth().height(250.dp).padding(start = 16.dp , end = 16.dp , top = 32.dp)
-                    .border(3.dp, Color.Green, CardDefaults.elevatedShape)
+                modifier = Modifier.fillMaxWidth().height(250.dp)
+                    .padding(start = 16.dp, end = 16.dp, top = 32.dp)
+                    .border(3.dp, Green, CardDefaults.elevatedShape)
             ) {
                 Box(modifier = Modifier.background(Color.Black)) {
                     Box(modifier = Modifier.padding(16.dp), contentAlignment = Alignment.Center) {
-                        VideoPlayer(Modifier.fillMaxWidth().height(400.dp), state.playVideo)
+                        VideoPlayer(Modifier.fillMaxSize(), state.playVideo)
                     }
                     Row {
                         Spacer(modifier = Modifier.weight(1f))
-                        Box(contentAlignment = Alignment.Center){
+                        Box(contentAlignment = Alignment.Center) {
                             Image(
                                 painter = painterResource(Res.drawable.portal),
                                 contentDescription = null,
@@ -121,24 +150,58 @@ private fun EpisodePlayer(state: EpisodesState, onCloseVideo: () -> Unit) {
                     }
                 }
             }
-        }else{
-            ElevatedCard(
-                modifier = Modifier.fillMaxWidth().padding(start = 16.dp , end = 16.dp , top = 32.dp),
-                colors = CardDefaults.elevatedCardColors().copy(containerColor = PlaceholderColor)
-            ) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Image(painter = painterResource(Res.drawable.placeholder), null)
-                    Spacer(Modifier.height(4.dp))
-                    Text(
-                        "Aw, jeez, you gotta click the video, guys! I mean, it might be important or something!",
-                        color = DefaultTextColor,
-                        fontStyle = FontStyle.Italic,
-                        modifier = Modifier.padding(16.dp)
-
-                    )
-                }
+        } else {
+            if (isDesktop()) {
+                PlaceHolderMobile()
+            } else {
+                PlaceHolderDesktop()
             }
         }
+    }
+}
+
+@Composable
+private fun PlaceHolderMobile() {
+    ElevatedCard(
+        modifier = Modifier.fillMaxWidth().padding(start = 16.dp, end = 16.dp, top = 32.dp),
+        colors = CardDefaults.elevatedCardColors().copy(containerColor = PlaceholderColor)
+    ) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Image(painter = painterResource(Res.drawable.placeholder), null)
+            Spacer(Modifier.height(4.dp))
+            Text(
+                "Aw, jeez, you gotta click the video, guys! I mean, it might be important or something!",
+                color = DefaultTextColor,
+                fontStyle = FontStyle.Italic,
+                modifier = Modifier.padding(16.dp)
+
+            )
+        }
+    }
+}
+
+@Composable
+private fun PlaceHolderDesktop() {
+    ElevatedCard(
+        modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 4.dp, bottom = 8.dp),
+        colors = CardDefaults.elevatedCardColors().copy(containerColor = PlaceholderColor)
+    ) {
+
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Image(
+                painter = painterResource(Res.drawable.placeholder),
+                contentDescription = null,
+                contentScale = ContentScale.Crop
+            )
+            Spacer(Modifier.height(2.dp))
+            Text(
+                "Aw, jeez, you gotta click the video, guys! I mean, it might be important or something!",
+                color = DefaultTextColor,
+                fontStyle = FontStyle.Italic
+
+            )
+        }
+
     }
 }
 
@@ -156,7 +219,11 @@ fun EpisodesItemList(episodes: EpisodeModel, onEpisodeSelected: (String) -> Unit
             )
         )
         Spacer(modifier = Modifier.height(8.dp))
-        Box(modifier = Modifier.padding(horizontal = 8.dp).background(BackgroundPrimaryColor).fillMaxWidth() .border(2.dp, Green, shape = RoundedCornerShape(0, 24, 0, 24)), contentAlignment = Alignment.Center){
+        Box(
+            modifier = Modifier.padding(horizontal = 8.dp).background(BackgroundPrimaryColor)
+                .fillMaxWidth().border(2.dp, Green, shape = RoundedCornerShape(0, 24, 0, 24)),
+            contentAlignment = Alignment.Center
+        ) {
             Text(text = episodes.episode, color = DefaultTextColor)
         }
     }
