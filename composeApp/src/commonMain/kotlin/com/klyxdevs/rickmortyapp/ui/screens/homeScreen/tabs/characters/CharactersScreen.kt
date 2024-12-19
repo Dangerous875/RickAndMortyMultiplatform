@@ -3,7 +3,6 @@ package com.klyxdevs.rickmortyapp.ui.screens.homeScreen.tabs.characters
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -11,9 +10,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.GridItemSpan
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
@@ -34,7 +30,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import androidx.paging.LoadState
 import app.cash.paging.compose.LazyPagingItems
 import app.cash.paging.compose.collectAsLazyPagingItems
 import coil3.compose.AsyncImage
@@ -43,12 +38,10 @@ import com.klyxdevs.rickmortyapp.ui.components.CircularProgressBar
 import com.klyxdevs.rickmortyapp.ui.components.PagingType
 import com.klyxdevs.rickmortyapp.ui.components.PagingWrapper
 import com.klyxdevs.rickmortyapp.ui.core.colors.BackgroundPrimaryColor
-import com.klyxdevs.rickmortyapp.ui.core.colors.BackgroundSecondaryColor
 import com.klyxdevs.rickmortyapp.ui.core.colors.DefaultTextColor
 import com.klyxdevs.rickmortyapp.ui.core.extensions.vertical
 import com.klyxdevs.rickmortyapp.ui.core.navigation.CharacterDetailRoute
 import com.klyxdevs.rickmortyapp.ui.screens.homeScreen.tabs.characters.viewmodel.CharactersViewModel
-import com.klyxdevs.rickmortyapp.ui.screens.homeScreen.tabs.episodes.EpisodesItemList
 import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI

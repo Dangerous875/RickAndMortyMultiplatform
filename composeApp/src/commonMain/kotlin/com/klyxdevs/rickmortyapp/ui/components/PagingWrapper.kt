@@ -1,11 +1,7 @@
 package com.klyxdevs.rickmortyapp.ui.components
 
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import app.cash.paging.compose.LazyPagingItems
 
@@ -53,16 +49,7 @@ fun <T : Any> PagingWrapper(
                 }
 
                 PagingType.VERTICAL_GRID -> {
-                    LazyVerticalGrid(
-                        columns = GridCells.Fixed(2),
-                        contentPadding = PaddingValues(8.dp)
-                    ) {
-                        items(pagingItems.itemCount) { pos ->
-                            pagingItems[pos]?.let { item ->
-                                itemView(item)
-                            }
-                        }
-                    }
+                    LazyVerticalTarget(pagingItems, itemView = itemView)
                 }
             }
 
