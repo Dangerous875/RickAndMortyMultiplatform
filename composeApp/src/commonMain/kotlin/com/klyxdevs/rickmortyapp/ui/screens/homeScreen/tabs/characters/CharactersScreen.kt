@@ -40,11 +40,15 @@ import app.cash.paging.compose.collectAsLazyPagingItems
 import coil3.compose.AsyncImage
 import com.klyxdevs.rickmortyapp.domain.model.CharacterModel
 import com.klyxdevs.rickmortyapp.ui.components.CircularProgressBar
+import com.klyxdevs.rickmortyapp.ui.components.PagingType
+import com.klyxdevs.rickmortyapp.ui.components.PagingWrapper
 import com.klyxdevs.rickmortyapp.ui.core.colors.BackgroundPrimaryColor
+import com.klyxdevs.rickmortyapp.ui.core.colors.BackgroundSecondaryColor
 import com.klyxdevs.rickmortyapp.ui.core.colors.DefaultTextColor
 import com.klyxdevs.rickmortyapp.ui.core.extensions.vertical
 import com.klyxdevs.rickmortyapp.ui.core.navigation.CharacterDetailRoute
 import com.klyxdevs.rickmortyapp.ui.screens.homeScreen.tabs.characters.viewmodel.CharactersViewModel
+import com.klyxdevs.rickmortyapp.ui.screens.homeScreen.tabs.episodes.EpisodesItemList
 import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
@@ -72,57 +76,26 @@ fun CharactersGridList(
     characters: LazyPagingItems<CharacterModel>,
     onSelectItem: (CharacterModel) -> Unit
 ) {
-    Column {
+    Column(modifier = Modifier.background(BackgroundPrimaryColor)) {
         Text(
             "Characters",
             color = DefaultTextColor,
             fontSize = 24.sp,
             fontWeight = FontWeight.SemiBold,
-            modifier = Modifier.fillMaxWidth().padding(vertical = 2.dp).background(BackgroundPrimaryColor), textAlign = TextAlign.Center
+            modifier = Modifier.fillMaxWidth().padding(vertical = 2.dp)
+                .background(BackgroundPrimaryColor), textAlign = TextAlign.Center
         )
-        LazyVerticalGrid(
-            modifier = Modifier.fillMaxSize().background(BackgroundPrimaryColor).padding(horizontal = 16.dp),
-            columns = GridCells.Fixed(2),
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            item(span = { GridItemSpan(2) }) {
-                CharacterOfTheDay(state.characterOfTheDay){onSelectItem(it)}
+
+        CharacterOfTheDay(state.characterOfTheDay) { onSelectItem(it) }
+
+        PagingWrapper(
+            pagingType = PagingType.VERTICAL_GRID,
+            pagingItems = characters,
+            initialView = { CircularProgressBar(color = Green.copy(alpha = 0.5f)) },
+            itemView = {
+                CharacterItemList(it) { character -> onSelectItem(character) }
             }
-            when {
-                characters.loadState.refresh is LoadState.Loading && characters.itemCount == 0 -> {
-                    //carga inicial
-                    item(span = { GridItemSpan(2) }) {
-                        CircularProgressBar(color = Green, size = 60.dp)
-                    }
-                }
-
-                characters.loadState.refresh is LoadState.NotLoading && characters.itemCount == 0 -> {
-                    // API vacia
-                    item(span = { GridItemSpan(2) }) {
-                        Text("Empty list :(")
-                    }
-                }
-
-                else -> {
-                    // Recorremos los items
-                    items(characters.itemCount) { pos ->
-                        characters[pos]?.let { characterModel ->
-                            CharacterItemList(characterModel) { onSelectItem(it) }
-                        }
-                    }
-                    // carga final
-                    if (characters.loadState.append is LoadState.Loading) {
-                        item(span = { GridItemSpan(2) }) {
-                            CircularProgressBar(color = Green)
-
-                        }
-                    }
-                }
-
-
-            }
-        }
+        )
     }
 
 }
@@ -163,9 +136,14 @@ fun CharacterItemList(characterModel: CharacterModel, onSelectItem: (CharacterMo
 
 
 @Composable
-fun CharacterOfTheDay(characterModel: CharacterModel? = null , onSelectItem: (CharacterModel) -> Unit) {
+fun CharacterOfTheDay(
+    characterModel: CharacterModel? = null,
+    onSelectItem: (CharacterModel) -> Unit
+) {
     Card(
-        modifier = Modifier.fillMaxWidth().height(400.dp).padding(top = 4.dp).clickable { onSelectItem(characterModel!!) }, shape = RoundedCornerShape(12)
+        modifier = Modifier.fillMaxWidth().height(350.dp)
+            .padding(top = 4.dp, bottom = 4.dp, start = 16.dp, end = 16.dp)
+            .clickable { onSelectItem(characterModel!!) }, shape = RoundedCornerShape(12)
     ) {
         if (characterModel == null) {
             CircularProgressBar(color = Green)

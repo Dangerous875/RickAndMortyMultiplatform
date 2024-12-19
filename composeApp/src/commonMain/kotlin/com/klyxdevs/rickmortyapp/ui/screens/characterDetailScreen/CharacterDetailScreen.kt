@@ -2,6 +2,7 @@ package com.klyxdevs.rickmortyapp.ui.screens.characterDetailScreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,6 +20,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -32,10 +34,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import co.touchlab.kermit.Logger
 import coil3.compose.AsyncImage
 import com.klyxdevs.rickmortyapp.domain.model.EpisodeModel
+import com.klyxdevs.rickmortyapp.isDesktop
 import com.klyxdevs.rickmortyapp.ui.components.CircularProgressBar
 import com.klyxdevs.rickmortyapp.ui.components.TextTitle
 import com.klyxdevs.rickmortyapp.ui.core.colors.BackgroundPrimaryColor
@@ -45,6 +48,7 @@ import com.klyxdevs.rickmortyapp.ui.core.colors.DefaultTextColor
 import com.klyxdevs.rickmortyapp.ui.core.colors.Pink
 import com.klyxdevs.rickmortyapp.ui.core.extensions.aliveBorder
 import com.klyxdevs.rickmortyapp.ui.core.extensions.decodingObject
+import com.klyxdevs.rickmortyapp.ui.core.navigation.HomeScreenRoute
 import com.klyxdevs.rickmortyapp.ui.screens.characterDetailScreen.model.CharacterDetail
 import com.klyxdevs.rickmortyapp.ui.screens.characterDetailScreen.viewmodel.CharacterDetailViewModel
 import org.jetbrains.compose.resources.painterResource
@@ -52,11 +56,12 @@ import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 import org.koin.core.parameter.parametersOf
 import rickmortyapp.composeapp.generated.resources.Res
+import rickmortyapp.composeapp.generated.resources.ic_back
 import rickmortyapp.composeapp.generated.resources.space
 
 @OptIn(KoinExperimentalAPI::class)
 @Composable
-fun CharacterDetailScreen(characterDetail: String, navController: NavController) {
+fun CharacterDetailScreen(characterDetail: String, mainNavHostController: NavHostController) {
     val character = characterDetail.decodingObject()
     logs(characterDetail, character)
     val viewModel =
@@ -68,7 +73,12 @@ fun CharacterDetailScreen(characterDetail: String, navController: NavController)
         modifier = Modifier.fillMaxSize().background(BackgroundPrimaryColor)
             .verticalScroll(scrollState)
     ) {
-        MainHeader(uiState.characterDetail, {})  /*onBackPressed*/
+        MainHeader(uiState.characterDetail) {
+            mainNavHostController.navigate(HomeScreenRoute) {
+                popUpTo(HomeScreenRoute) { inclusive = true }
+            }
+        }
+
         Spacer(Modifier.height(16.dp))
         Column(
             modifier = Modifier.fillMaxSize()
@@ -148,14 +158,14 @@ fun MainHeader(characterDetail: CharacterDetail, onBackPressed: () -> Unit) {
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop
         )
-//        if (isDesktop()) {
-//            Icon(
-//                painter = painterResource(Res.drawable.ic_back),
-//                null,
-//                tint = Color.White,
-//                modifier = Modifier.padding(16.dp).size(24.dp).clickable { onBackPressed() }
-//            )
-//        }
+        if (isDesktop()) {
+            Icon(
+                painter = painterResource(Res.drawable.ic_back),
+                null,
+                tint = Color.White,
+                modifier = Modifier.padding(16.dp).size(24.dp).clickable { onBackPressed() }
+            )
+        }
         CharacterHeader(characterDetail)
     }
 }
