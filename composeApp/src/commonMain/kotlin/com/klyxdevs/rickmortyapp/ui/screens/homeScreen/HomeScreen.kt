@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
@@ -19,6 +20,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import co.touchlab.kermit.Logger
+import com.klyxdevs.rickmortyapp.isDesktop
 import com.klyxdevs.rickmortyapp.ui.core.colors.BackgroundPrimaryColor
 import com.klyxdevs.rickmortyapp.ui.core.colors.BackgroundSecondaryColor
 import com.klyxdevs.rickmortyapp.ui.core.colors.BackgroundTertiaryColor
@@ -38,9 +40,13 @@ fun HomeScreen(mainNavHostController: NavHostController) {
         bottomBar = { BottomNavigation(items, navControllerNavBar) },
         topBar = { TopBar() }
     ) { padding ->
-        Box(modifier = Modifier.padding(padding)) {
+        Box(
+            modifier = Modifier.padding(padding)
+        ) {
             NavigationBottomWrapper(mainNavHostController, navControllerNavBar)
         }
+
+
     }
 }
 
@@ -54,6 +60,7 @@ fun TopBar() {
             painter = painterResource(Res.drawable.ricktoolbar),
             null,
             modifier = Modifier.fillMaxWidth().padding(start = 16.dp, top = 16.dp, bottom = 8.dp)
+                .size(if (isDesktop()) 80.dp else 42.dp),
         )
     }
 }

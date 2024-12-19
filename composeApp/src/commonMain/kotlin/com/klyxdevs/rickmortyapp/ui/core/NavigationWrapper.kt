@@ -12,12 +12,12 @@ import com.klyxdevs.rickmortyapp.ui.screens.homeScreen.HomeScreen
 
 @Composable
 fun NavigationWrapper() {
-    val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = HomeScreenRoute) {
-        composable<HomeScreenRoute> { HomeScreen(navController) }
+    val mainNavController = rememberNavController()
+    NavHost(navController = mainNavController, startDestination = HomeScreenRoute) {
+        composable<HomeScreenRoute> { HomeScreen(mainNavController) }
         composable<CharacterDetailRoute> {
             val safeArgs = it.toRoute<CharacterDetailRoute>()
-            CharacterDetailScreen(safeArgs.characterDetail,navController)
+            CharacterDetailScreen(safeArgs.characterDetail,mainNavController)
         }
     }
 }
