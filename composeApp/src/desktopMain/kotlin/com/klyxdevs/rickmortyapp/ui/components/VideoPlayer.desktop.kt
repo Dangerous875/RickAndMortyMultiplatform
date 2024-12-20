@@ -21,8 +21,8 @@ import com.multiplatform.webview.web.rememberWebViewState
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 actual fun VideoPlayer(modifier: Modifier, url: String) {
-//    val state = rememberWebViewState(url)
-    val state = rememberWebViewState("https://www.youtube.com/watch?v=anOZ9bXUTQc&list=RDMManOZ9bXUTQc&start_radio=1&ab_channel=LEGION141")
+    val state = rememberWebViewState(url)
+//    val state = rememberWebViewState("https://www.youtube.com/watch?v=anOZ9bXUTQc&list=RDMManOZ9bXUTQc&start_radio=1&ab_channel=LEGION141")
     state.webSettings.apply {
         isJavaScriptEnabled = true
     }
