@@ -2,7 +2,7 @@ This is a Kotlin Multiplatform project targeting Android, iOS, Desktop.
 
 #  Rick And Morty Multiplatform
 > [!NOTE]
-> Description of Kotlin Multiplatform Marvel (Kotlin multiplatform, Jetpack compose, MVVM, Clean arquitecture, navigation 2.8.0 with Kotlin Serialization and safeargs arguments, Koin, Ktor, ViewModels, Coil, Paging3, Room and WebView).
+> Description of Rick And Morty Multiplatform (Kotlin multiplatform, Jetpack compose, MVVM, Clean arquitecture, navigation 2.8.0 with Kotlin Serialization and safeargs arguments, Koin, Ktor, ViewModels, Coil, Paging3, Room and WebView).
 This application works on Android, iOS and Desktop
 > 
 # Description 
