@@ -1,13 +1,9 @@
 package com.klyxdevs.rickmortyapp.ui.components
 
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
 import androidx.paging.LoadState
 import app.cash.paging.compose.LazyPagingItems
-import com.klyxdevs.rickmortyapp.ui.components.PagingType.*
 
 
 enum class PagingType {
@@ -38,17 +34,11 @@ fun <T : Any> PagingWrapper(
         else -> {
 
             when (pagingType) {
-                ROW -> {
-                    LazyRow {
-                        items(pagingItems.itemCount) { pos ->
-                            pagingItems[pos]?.let { item ->
-                                itemView(item)
-                            }
-                        }
-                    }
+                PagingType.ROW -> {
+                    LazyRowTarget(pagingItems, itemView = itemView)
                 }
 
-                COLUMN -> {
+                PagingType.COLUMN -> {
                     LazyColumn {
                         items(pagingItems.itemCount) { pos ->
                             pagingItems[pos]?.let { item ->
@@ -58,16 +48,9 @@ fun <T : Any> PagingWrapper(
                     }
                 }
 
-                VERTICAL_GRID -> {
-                    LazyVerticalGrid(columns = GridCells.Fixed(2)) {
-                        items(pagingItems.itemCount) { pos ->
-                            pagingItems[pos]?.let { item ->
-                                itemView(item)
-                            }
-                        }
-                    }
+                PagingType.VERTICAL_GRID -> {
+                    LazyVerticalTarget(pagingItems, itemView = itemView)
                 }
-
             }
 
             if (pagingItems.loadState.append is LoadState.Loading) {
