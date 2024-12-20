@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
@@ -34,6 +35,7 @@ import app.cash.paging.compose.LazyPagingItems
 import app.cash.paging.compose.collectAsLazyPagingItems
 import coil3.compose.AsyncImage
 import com.klyxdevs.rickmortyapp.domain.model.CharacterModel
+import com.klyxdevs.rickmortyapp.isDesktop
 import com.klyxdevs.rickmortyapp.ui.components.CircularProgressBar
 import com.klyxdevs.rickmortyapp.ui.components.PagingType
 import com.klyxdevs.rickmortyapp.ui.components.PagingWrapper
@@ -78,8 +80,17 @@ fun CharactersGridList(
             modifier = Modifier.fillMaxWidth().padding(vertical = 2.dp)
                 .background(BackgroundPrimaryColor), textAlign = TextAlign.Center
         )
+        if (isDesktop()) {
+            Box(
+                modifier = Modifier.width(500.dp).height(400.dp)
+                    .align(Alignment.CenterHorizontally), contentAlignment = Alignment.Center
+            ) {
+                CharacterOfTheDay(state.characterOfTheDay) { onSelectItem(it) }
+            }
+        } else {
+            CharacterOfTheDay(state.characterOfTheDay) { onSelectItem(it) }
+        }
 
-        CharacterOfTheDay(state.characterOfTheDay) { onSelectItem(it) }
 
         PagingWrapper(
             pagingType = PagingType.VERTICAL_GRID,
@@ -171,4 +182,5 @@ fun CharacterOfTheDay(
             }
         }
     }
+
 }

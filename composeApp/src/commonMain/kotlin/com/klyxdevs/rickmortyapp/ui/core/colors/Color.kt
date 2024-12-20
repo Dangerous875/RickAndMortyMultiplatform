@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import com.klyxdevs.rickmortyapp.isDesktop
 
+// colors
 val BackgroundPrimaryColor
     @Composable
     get() = when {
